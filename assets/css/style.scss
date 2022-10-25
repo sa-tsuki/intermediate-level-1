@@ -22,6 +22,27 @@ img {
   font-family: "Roboto";
 }
 
+@keyframes bound-anim {
+  0% {
+    top: -15%;
+    transform: scale(1);
+  }
+  30% {
+    top: -40%;
+  }
+  50% {
+    transform: scale(1);
+  }
+  90% {
+    top: -15%;
+    transform: scale(1.1, 0.8);
+  }
+  100% {
+    top: -15%;
+    transform: scale(1);
+  }
+}
+
 header {
   grid-row: 1;
   position: sticky;
@@ -50,6 +71,26 @@ header {
       a {
         font-size: 16px;
         font-weight: 700;
+        position: relative;
+
+        &:before {
+          content: "";
+          position: absolute;
+          bottom: -3px;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background-color: #3f3f3f;
+          transition: 0.2s ease-in-out;
+          transform-origin: left top;
+          transform: scale(0, 1);
+        }
+
+        &:hover {
+          &:before {
+            transform: scale(1, 1);
+          }
+        }
       }
 
       &-signIn {
@@ -58,6 +99,15 @@ header {
           color: #fff;
           background-color: #3f3f3f;
           border-radius: 5px;
+          transition: 0.2s ease-in-out;
+
+          &:before {
+            content: unset;
+          }
+
+          &:hover {
+            opacity: 0.9;
+          }
         }
       }
 
@@ -65,6 +115,17 @@ header {
         width: 30px;
         a {
           position: relative;
+          transition: 0.2s ease-in-out;
+
+          &:before {
+            content: unset;
+          }
+
+          &:hover {
+            .header__cartNumber {
+              animation: bound-anim 0.8s infinite;
+            }
+          }
         }
       }
     }
@@ -144,9 +205,15 @@ main {
         margin-top: 35px;
 
         a {
-          display: flex;
+          display: inline-flex;
           align-items: center;
           gap: 32px;
+
+          &:hover {
+            .main__leftToDetailArrow {
+              transform: translateX(5px);
+            }
+          }
         }
 
         &Text {
@@ -158,6 +225,10 @@ main {
         &Arrow {
           width: 32px;
         }
+      }
+
+      &ToDetailArrow {
+        transition: 0.3s ease-in-out;
       }
     }
 
@@ -210,6 +281,14 @@ main {
             transform: translate(-50%, -50%);
             transition: 0.3s;
             opacity: 0;
+            cursor: pointer;
+            transition: 0.2s ease-in-out;
+          }
+
+          &:hover {
+            &:before {
+              opacity: 1;
+            }
           }
         }
       }
@@ -239,6 +318,12 @@ main {
           padding: 6px 28px;
           transition: 0.3s;
           border-radius: 999px;
+          transition: 0.2s ease-in-out;
+
+          &:hover {
+            background-color: #3f3f3f;
+            color: #fff;
+          }
         }
       }
 
@@ -315,6 +400,11 @@ main {
           font-weight: 400;
           font-size: 18px;
           line-height: 22px;
+          transition: opacity 0.2s ease-in;
+
+          &:hover {
+            opacity: 0.7;
+          }
         }
 
         &Favorite {
